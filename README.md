@@ -1,2 +1,2 @@
 # m2m-api
-This project provides API documentation for PeopleNet's M2M platform.
+This project provides API documentation and code samples for PeopleNet's M2M platform.

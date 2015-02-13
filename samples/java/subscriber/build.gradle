@@ -12,13 +12,14 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'application'
+
+mainClassName = "com.peoplenet.m2m.sample.subscriber.Subscriber"
 
 repositories {
     jcenter()
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile 'net.sf.xenqtt:xenqtt:0.9.5'
 }

@@ -17,14 +17,14 @@ import net.sf.xenqtt.message.ConnectReturnCode;
 public class Subscriber implements MqttClientListener {
 
 	private static final Logger log = Logger.getLogger(Subscriber.class.getName());
-	private static Subscriber subscriber;
 
 	public static void main(String[] args) {
 
 		try {
 			log.info("Initializing MQTT subscriber...");
-			subscriber = new Subscriber();
+			Subscriber subscriber = new Subscriber();
 			subscriber.subscribe();
+			// now wait forever...
 			Thread.currentThread().join();
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Exception attempting to subscribe to MQTT topic. Error message: ", e);

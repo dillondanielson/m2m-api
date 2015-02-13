@@ -42,8 +42,8 @@ public class Subscriber implements MqttClientListener {
 
 		// username and password are not required per the MQTT spec, only specify if available
 		ConnectReturnCode returnCode = mqttSettings.getUsername() != null ?
-				client.connect(mqttSettings.getClientId(), false, mqttSettings.getUsername(), mqttSettings.getPassword()) :
-				client.connect(mqttSettings.getClientId(), false);
+				client.connect(mqttSettings.getClientId(), mqttSettings.isCleanSession(), mqttSettings.getUsername(), mqttSettings.getPassword()) :
+				client.connect(mqttSettings.getClientId(), mqttSettings.isCleanSession());
 
 		if (returnCode != ConnectReturnCode.ACCEPTED) {
 			throw new IOException("Unable to connect to MQTT broker. Reason:" + returnCode);

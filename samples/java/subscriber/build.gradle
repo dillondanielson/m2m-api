@@ -1,0 +1,25 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "com.peoplenet.m2m.sample.subscriber.Subscriber"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'net.sf.xenqtt:xenqtt:0.9.5'
+}

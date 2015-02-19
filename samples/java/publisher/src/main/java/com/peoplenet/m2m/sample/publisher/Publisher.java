@@ -1,6 +1,7 @@
-package com.peoplenet.m2m.sample.subscriber;
+package com.peoplenet.m2m.sample.publisher;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,36 +9,36 @@ import net.sf.xenqtt.client.MqttClient;
 import net.sf.xenqtt.client.MqttClientFactory;
 import net.sf.xenqtt.client.MqttClientListener;
 import net.sf.xenqtt.client.PublishMessage;
-import net.sf.xenqtt.client.Subscription;
 import net.sf.xenqtt.message.ConnectReturnCode;
 
 /**
- * Sample synchronous MQTT subscriber using the <a href="http://xenqtt.sourceforge.net/documentation.html">XenQtt</a> library.
+ * Sample synchronous MQTT publisher that publishes 5 messages with a 1 second delay between each message.
  */
-public class Subscriber implements MqttClientListener {
+public class Publisher implements MqttClientListener {
 
-	private static final Logger log = Logger.getLogger(Subscriber.class.getName());
+	private static final Logger log = Logger.getLogger(Publisher.class.getName());
 
 	public static void main(String[] args) {
 
 		try {
-			log.info("Initializing MQTT subscriber...");
-			Subscriber subscriber = new Subscriber();
-			subscriber.subscribe();
+			log.info("Establishing MQTT connection.");
+			Publisher publisher = new Publisher();
+			publisher.publish();
 		} catch (Throwable t) {
-			log.log(Level.SEVERE, "Exception attempting to subscribe to MQTT topic.", t);
+			log.log(Level.SEVERE, "Exception attempting to publish to MQTT topic.", t);
 		}
 	}
 
 	/**
-	 * Create the MQTT client, connect and subscribe.
+	 * Create the MQTT client and publish a series of messages containing the current time.
 	 */
-	private void subscribe() throws IOException {
+	private void publish() throws IOException {
 
 		MqttSettings mqttSettings = new MqttSettings(getMqttProperties());
-		MqttClientFactory factory = new MqttClientFactory(mqttSettings.getBrokerUri(), mqttSettings.getMessageHandlerThreadPoolSize(), true);
+		MqttClientFactory factory = new MqttClientFactory(mqttSettings.getBrokerUri(), 1, true);
 
-		// create new mqtt client providing this as the MqttClientListener implementation
+		// create new mqtt client providing this as the MqttClientListener implementation.
+		// even though we're not listening for messages, a message listner must be provided to the xenqtt api.
 		MqttClient client = factory.newSynchronousClient(this);
 
 		// username and password are not required per the MQTT spec, only specify if available
@@ -50,9 +51,14 @@ public class Subscriber implements MqttClientListener {
 		}
 		log.info("MQTT connection established.");
 
-		Subscription subscription = new Subscription(mqttSettings.getTopic(), mqttSettings.getQos());
-		client.subscribe(new Subscription[] { subscription });
-		log.info("Successfully subscribed to " + subscription);
+		// publish 5 messages with a 1 second delay between each.
+		for (int i = 0; i < 5; i++) {
+			String msg = new Date().toString();
+			client.publish(new PublishMessage(mqttSettings.getTopic(), mqttSettings.getQos(), new Date().toString()));
+			log.info("Successfully published [" + msg + "] to [" + mqttSettings.getTopic() + "]");
+			sleep(1000);
+		}
+		log.info("Publishing complete.");
 	}
 
 	private Properties getMqttProperties() throws IOException {
@@ -61,19 +67,19 @@ public class Subscriber implements MqttClientListener {
 		return props;
 	}
 
-	/**
-	 * Handle each message with this method.
-	 */
 	@Override public void publishReceived(MqttClient client, PublishMessage message) {
-
-		log.info("Received: " + message.getPayloadString());
+		// nothing to do here...
 	}
 
-	/**
-	 * Called if the MQTT connection becomes disconnected. In most cases, XenQTT will attempt to re-establish the connection.
-	 */
 	@Override public void disconnected(MqttClient client, Throwable cause, boolean reconnecting) {
+		// nothing to do here...
+	}
 
-		log.info("MQTT connection disconnected. Reconnecting:" + reconnecting);
+	private void sleep(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (Exception e) {
+			// ignore
+		}
 	}
 }

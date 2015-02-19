@@ -4,7 +4,7 @@ import java.util.Properties;
 import net.sf.xenqtt.message.QoS;
 
 /**
- * Subscription settings loaded via the mqtt.properties file.
+ * Publisher settings loaded via the mqtt.properties file.
  */
 public class MqttSettings {
 

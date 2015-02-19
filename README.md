@@ -21,7 +21,7 @@ The sample java code utilizes the [XenQTT](https://github.com/TwoGuysFromKabul/x
 
 The majority of the code is contained within two classes.
 * [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/publisher/Publisher.java)
-* [Subscriber.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/subscriber/Subscriber.java)
+* [Subscriber.java](samples/java/subscriber/src/main/java/com/peoplenet/m2m/sample/subscriber/Subscriber.java)
 
 #### Running the Java Sample
 To run the samples, first clone the project from github.

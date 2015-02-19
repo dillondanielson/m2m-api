@@ -88,7 +88,7 @@ INFO: Received: Thu Feb 19 16:53:15 CST 2015
 ```
 As you can see, the subscriber received five separate messages from the publisher.
 
-To shutdown the consumer, simply use <ctrl-c> from the command line.
+To shutdown the consumer, simply use ```<ctrl-c>``` from the command line.
 
 #### Java Sample Configuration
 The publisher and subscriber are each configured via their own mqtt.properties file contained within the project.
@@ -99,4 +99,4 @@ The publisher and subscriber are each configured via their own mqtt.properties f
 Note, the default *mqtt.properties* files are configured to use the freely available mosquito broker located at *test.mosquito.org*. Unlike the PeopleNet M2M broker, the mosquito broker does not require any security credentials.
 
 ##### ClientId
-There is a chance for clientId conflicts using the default mqtt.properties. If you notice the clients being disconnected frequently it could be that you're conflicting with someone else using the same default clientId. In this case, feel free to update the clientId in each mqtt.properties file to be unique for your personal tests.
+There is a chance for clientId conflicts using the default mqtt.properties. If you notice the clients being disconnected frequently, it could be that you're conflicting with someone else using the same default clientId. In this case, feel free to update the clientId in each mqtt.properties file to be unique for your personal tests.

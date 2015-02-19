@@ -18,24 +18,47 @@ public class Subscriber implements MqttClientListener {
 
 	private static final Logger log = Logger.getLogger(Subscriber.class.getName());
 
+	private MqttSettings mqttSettings;
+	private MqttClientFactory factory;
+	private MqttClient client;
+
 	public static void main(String[] args) {
 
+		Subscriber subscriber = new Subscriber();
 		try {
-			log.info("Initializing MQTT subscriber...");
-			Subscriber subscriber = new Subscriber();
+			subscriber.init();
 			subscriber.subscribe();
+			subscriber.waitForDelay();
 		} catch (Throwable t) {
 			log.log(Level.SEVERE, "Exception attempting to subscribe to MQTT topic.", t);
+		} finally {
+			subscriber.shutdown();
 		}
+	}
+
+	private void waitForDelay() throws InterruptedException {
+		// sleep for the number of millis specified in mqtt.properties
+		if (mqttSettings.getWaitTimeMillis() == -1) {
+			log.info("Waiting for messages until program termination.");
+			Thread.sleep(Long.MAX_VALUE);
+		} else {
+			log.info("Waiting " + mqttSettings.getWaitTimeMillis() + " ms for incoming messages.");
+			Thread.sleep(mqttSettings.getWaitTimeMillis());
+		}
+	}
+
+	private void init() throws IOException {
+
+		log.info("Initializing MQTT subscriber...");
+		mqttSettings = new MqttSettings(getMqttProperties());
+		factory = new MqttClientFactory(mqttSettings.getBrokerUri(), mqttSettings.getMessageHandlerThreadPoolSize(), true);
+		client = factory.newSynchronousClient(this);
 	}
 
 	/**
 	 * Create the MQTT client, connect and subscribe.
 	 */
 	private void subscribe() throws IOException {
-
-		MqttSettings mqttSettings = new MqttSettings(getMqttProperties());
-		MqttClientFactory factory = new MqttClientFactory(mqttSettings.getBrokerUri(), mqttSettings.getMessageHandlerThreadPoolSize(), true);
 
 		// create new mqtt client providing this as the MqttClientListener implementation
 		MqttClient client = factory.newSynchronousClient(this);
@@ -59,6 +82,26 @@ public class Subscriber implements MqttClientListener {
 		Properties props = new Properties();
 		props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mqtt.properties"));
 		return props;
+	}
+
+	private void shutdown() {
+
+		log.info("Subscriber shutting down...");
+		if (client != null) {
+			try {
+				client.disconnect();
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+		if (factory != null) {
+			try {
+				factory.shutdown();
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+		log.info("Subscriber shutdown complete.");
 	}
 
 	/**

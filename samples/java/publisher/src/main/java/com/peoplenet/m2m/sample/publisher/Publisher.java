@@ -18,15 +18,29 @@ public class Publisher implements MqttClientListener {
 
 	private static final Logger log = Logger.getLogger(Publisher.class.getName());
 
+	private MqttSettings mqttSettings;
+	private MqttClientFactory factory;
+	private MqttClient client;
+
 	public static void main(String[] args) {
 
+		Publisher publisher = new Publisher();
 		try {
-			log.info("Establishing MQTT connection.");
-			Publisher publisher = new Publisher();
+			publisher.init();
 			publisher.publish();
 		} catch (Throwable t) {
 			log.log(Level.SEVERE, "Exception attempting to publish to MQTT topic.", t);
+		} finally {
+			publisher.shutdown();
 		}
+	}
+
+	private void init() throws IOException {
+
+		log.info("Initializing MQTT publisher.");
+		mqttSettings = new MqttSettings(getMqttProperties());
+		factory = new MqttClientFactory(mqttSettings.getBrokerUri(), 1, true);
+		client = factory.newSynchronousClient(this);
 	}
 
 	/**
@@ -34,8 +48,6 @@ public class Publisher implements MqttClientListener {
 	 */
 	private void publish() throws IOException {
 
-		MqttSettings mqttSettings = new MqttSettings(getMqttProperties());
-		MqttClientFactory factory = new MqttClientFactory(mqttSettings.getBrokerUri(), 1, true);
 
 		// create new mqtt client providing this as the MqttClientListener implementation.
 		// even though we're not listening for messages, a message listner must be provided to the xenqtt api.
@@ -51,14 +63,38 @@ public class Publisher implements MqttClientListener {
 		}
 		log.info("MQTT connection established.");
 
-		// publish 5 messages with a 1 second delay between each.
-		for (int i = 0; i < 5; i++) {
-			String msg = new Date().toString();
-			client.publish(new PublishMessage(mqttSettings.getTopic(), mqttSettings.getQos(), new Date().toString()));
-			log.info("Successfully published [" + msg + "] to [" + mqttSettings.getTopic() + "]");
-			sleep(1000);
+		try {
+			// publish 5 messages with a 1 second delay between each.
+			for (int i = 0; i < 5; i++) {
+				String msg = new Date().toString();
+				client.publish(new PublishMessage(mqttSettings.getTopic(), mqttSettings.getQos(), new Date().toString(), false));
+				log.info("Successfully published [" + msg + "] to [" + mqttSettings.getTopic() + "]");
+				sleep(1000);
+			}
+			log.info("Publishing complete.");
+		} finally {
+			client.disconnect();
 		}
-		log.info("Publishing complete.");
+	}
+
+	private void shutdown() {
+
+		log.info("Publisher shutting down...");
+		if (client != null) {
+			try {
+				client.disconnect();
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+		if (factory != null) {
+			try {
+				factory.shutdown();
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+		log.info("Publisher shutdown complete.");
 	}
 
 	private Properties getMqttProperties() throws IOException {

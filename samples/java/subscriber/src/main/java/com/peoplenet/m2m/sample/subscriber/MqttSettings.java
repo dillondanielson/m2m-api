@@ -18,6 +18,7 @@ public class MqttSettings {
 	private final QoS qos;
 
 	private final int messageHandlerThreadPoolSize;
+	private final long waitTimeMillis;
 
 	MqttSettings(Properties props) {
 
@@ -31,6 +32,7 @@ public class MqttSettings {
 		qos = QoS.valueOf(props.getProperty("qos"));
 
 		messageHandlerThreadPoolSize = Integer.valueOf(props.getProperty("messageHandlerThreadPoolSize"));
+		waitTimeMillis = Long.valueOf(props.getProperty("waitTimeMillis"));
 	}
 
 	public String getBrokerUri() {
@@ -65,4 +67,7 @@ public class MqttSettings {
 		return messageHandlerThreadPoolSize;
 	}
 
+	public long getWaitTimeMillis() {
+		return waitTimeMillis;
+	}
 }

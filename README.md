@@ -93,7 +93,7 @@ To shutdown the consumer, simply use ```<ctrl-c>``` from the command line.
 #### Java Sample Configuration
 The publisher and subscriber are each configured via their own mqtt.properties file contained within the project.
 * [samples/java/publisher/src/main/resources/mqtt.properties](samples/java/publisher/src/main/resources/mqtt.properties)
-* [samples/java/subscriber/src/main/resources/mqtt.properties](samples/java/subscriber/src/main/resources/mqtt.properties).
+* [samples/java/subscriber/src/main/resources/mqtt.properties](samples/java/subscriber/src/main/resources/mqtt.properties)
 
 ##### Credentials
 Note, the default *mqtt.properties* files are configured to use the freely available mosquito broker located at *test.mosquito.org*. Unlike the PeopleNet M2M broker, the mosquito broker does not require any security credentials.

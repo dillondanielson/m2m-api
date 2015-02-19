@@ -26,8 +26,8 @@ public class Subscriber implements MqttClientListener {
 			subscriber.subscribe();
 			// now wait forever...
 			Thread.currentThread().join();
-		} catch (Exception e) {
-			log.log(Level.SEVERE, "Exception attempting to subscribe to MQTT topic. Error message: ", e);
+		} catch (Throwable t) {
+			log.log(Level.SEVERE, "Exception attempting to subscribe to MQTT topic.", t);
 		}
 	}
 
@@ -38,6 +38,8 @@ public class Subscriber implements MqttClientListener {
 
 		MqttSettings mqttSettings = new MqttSettings(getMqttProperties());
 		MqttClientFactory factory = new MqttClientFactory(mqttSettings.getBrokerUri(), mqttSettings.getMessageHandlerThreadPoolSize(), true);
+
+		// create new mqtt client providing this as the MqttClientListener implementation
 		MqttClient client = factory.newSynchronousClient(this);
 
 		// username and password are not required per the MQTT spec, only specify if available

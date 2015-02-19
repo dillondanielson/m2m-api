@@ -16,6 +16,14 @@ By default, the publisher application publishes five separate MQTT messages cont
 
 The subscriber application subscribes to the same topic and prints the message contents to the console.
 
+### Java Code
+The sample java code utilizes the [XenQTT](https://github.com/TwoGuysFromKabul/xenqtt) client library.
+
+The majority of the code is contained within two classes.
+* [Publisher.java](m2m-api/samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/publisher/Publisher.java)
+*
+[Subscriber.java](m2m-api/samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/subscriber/Subscriber.java).
+
 #### Running the Java Sample
 To run the samples, first clone the project from github.
 ```

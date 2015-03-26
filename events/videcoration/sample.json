@@ -1,0 +1,19 @@
+{
+    "eventType": "viDecoration", 
+    "uuid": "c6291651\u20109271\u20104b25\u2010bdb4\u2010efabea052626", 
+    "viDecoration": {
+        "ambientTemp": 37, 
+        "awfTripId": 123456, 
+        "currentReg": 1, 
+        "driverID1": 5212, 
+        "driverID2": 5447, 
+        "dutyStatusAndModifierDriver1": 3, 
+        "dutyStatusAndModifierDriver2": 4, 
+        "remainingDrivingTime": 649, 
+        "remainingOnDutyTime": 779
+    }, 
+    "viHeader": {
+        "dsn": "1500111", 
+        "oerTriggerTime": 1416588222
+    }
+}

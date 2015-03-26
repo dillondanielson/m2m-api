@@ -1,0 +1,19 @@
+{
+    "eventType": String, 
+    "uuid": UUID, 
+    "viDecoration": {
+        "ambientTemp": Integer, 
+        "awfTripId": Integer, 
+        "currentReg": CurrentRegulation, 
+        "driverID1": Integer, 
+        "driverID2": Integer, 
+        "dutyStatusAndModifierDriver1": DutyStatus, 
+        "dutyStatusAndModifierDriver2": DutyStatus, 
+        "remainingDrivingTime": Long, 
+        "remainingOnDutyTime": Long
+    }, 
+    "viHeader": {
+        "dsn": String, 
+        "oerTriggerTime": UnixTime
+    }
+}

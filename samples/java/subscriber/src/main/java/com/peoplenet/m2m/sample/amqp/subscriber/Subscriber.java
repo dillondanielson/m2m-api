@@ -23,22 +23,8 @@ public class Subscriber {
         try {
             subscriber.init();
             subscriber.subscribe();
-            //subscriber.waitForDelay();
         } catch (Throwable t) {
             log.log(Level.SEVERE, "Exception attempting to subscribe to AMQP topic.", t);
-        } finally {
-           // subscriber.shutdown();
-        }
-    }
-
-    private void waitForDelay() throws InterruptedException {
-        // sleep for the number of millis specified in mqtt.properties
-        if (amqpSettings.getWaitTimeMillis() == -1) {
-            log.info("Waiting for messages until program termination.");
-            Thread.sleep(Long.MAX_VALUE);
-        } else {
-            log.info("Waiting " + amqpSettings.getWaitTimeMillis() + " ms for incoming messages.");
-            Thread.sleep(amqpSettings.getWaitTimeMillis());
         }
     }
 
@@ -70,50 +56,16 @@ public class Subscriber {
      */
     private void subscribe() throws Exception {
 
-        try {
-            channel.queueDeclare(amqpSettings.getQueueName(), false, false, false, null);
-            channel.queueBind(amqpSettings.getQueueName(), amqpSettings.getExchange(), amqpSettings.getRoutingKey());
-            ConsumerHandler consumer = new ConsumerHandler(channel);
-            channel.basicConsume(amqpSettings.getQueueName(), true, consumer);
-        } finally {
-          //  channel.close();
-           // connection.close();
-        }
-    }
-
-    private void shutdown() {
-
-        log.info("Subscriber shutting down...");
-        if (channel != null) {
-            try {
-                channel.close();
-            } catch (Exception e) {
-                // ignore
-            }
-        }
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (Exception e) {
-                // ignore
-            }
-        }
-        log.info("Subscriber shutdown complete.");
+        channel.queueDeclare(amqpSettings.getQueueName(), false, false, false, null);
+        channel.queueBind(amqpSettings.getQueueName(), amqpSettings.getExchange(), amqpSettings.getRoutingKey());
+        ConsumerHandler consumer = new ConsumerHandler(channel);
+        channel.basicConsume(amqpSettings.getQueueName(), true, consumer);
     }
 
     private Properties getAMQPProperties() throws IOException {
         Properties props = new Properties();
         props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("amqp.properties"));
         return props;
-    }
-
-
-    private void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (Exception e) {
-            // ignore
-        }
     }
 
     static class ConsumerHandler extends DefaultConsumer {

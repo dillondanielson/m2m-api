@@ -1,7 +1,5 @@
 package com.peoplenet.m2m.sample.amqp.publisher;
 
-import net.sf.xenqtt.message.QoS;
-
 import java.util.Properties;
 
 public class AmqpSettings {

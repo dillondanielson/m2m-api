@@ -2,10 +2,7 @@ package com.peoplenet.m2m.sample.amqp.subscriber;
 
 import java.util.Properties;
 
-/**
- * Created by agupta on 4/1/2015.
- */
-public class AMQPSettings {
+public class AmqpSettings {
 
     private final String brokerHost;
     private final Integer port;
@@ -16,9 +13,8 @@ public class AMQPSettings {
     private final String queueName;
     private final String routingKey;
     private final Integer prefetchCount;
-    private final long waitTimeMillis;
 
-    public AMQPSettings(Properties props) {
+    public AmqpSettings(Properties props) {
         brokerHost = props.getProperty("hostname");
         virtualhost = props.getProperty("virtualhost");
         port = Integer.valueOf(props.getProperty("port"));
@@ -28,15 +24,10 @@ public class AMQPSettings {
         exchange = props.getProperty("exchange");
         queueName = props.getProperty("queueName");
         prefetchCount = Integer.valueOf(props.getProperty("prefetchCount"));
-        waitTimeMillis = Long.valueOf(props.getProperty("waitTimeMillis"));
     }
 
     public String getBrokerHost() {
         return brokerHost;
-    }
-
-    public long getWaitTimeMillis() {
-        return waitTimeMillis;
     }
 
     public Integer getPort() {

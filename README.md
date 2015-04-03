@@ -5,23 +5,30 @@ This project provides API documentation and code samples for PeopleNet's M2M pla
 See the [m2m-api wiki](https://github.com/PeopleNet/m2m-api/wiki) for API documentation.
 
 ## Sample Code
-The m2m-api project contains sample MQTT publish and subscribe code.
+The m2m-api project contains sample MQTT and AMQP publish and subscribe code.
 
 ### Java Sample
 The Java sample code is located at [samples/java](samples/java).
 
-The sample consists of an MQTT publisher and an MQTT subscriber application.
+The sample consists of an MQTT and AMQP publisher and an MQTT and AMQP subscriber application.
 
 By default, the publisher application publishes five separate MQTT messages containing the current time to the topic *peoplenet/samples*.
 
 The subscriber application subscribes to the same topic and prints the message contents to the console.
 
 ### Java Code
-The sample java code utilizes the [XenQTT](https://github.com/TwoGuysFromKabul/xenqtt) client library.
+The sample java code utilizes the [XenQTT](https://github.com/TwoGuysFromKabul/xenqtt) client library for MQTT publisher and subscriber application and [Rabbit Java] (https://github.com/rabbitmq/rabbitmq-java-client) client library for AMQP publisher and subscriber application.
 
+##MQTT
 The majority of the code is contained within two classes.
-* [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/publisher/Publisher.java)
-* [Subscriber.java](samples/java/subscriber/src/main/java/com/peoplenet/m2m/sample/subscriber/Subscriber.java)
+* [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/mqtt/publisher/Publisher.java)
+* [Subscriber.java](samples/java/subscriber/src/main/java/com/peoplenet/m2m/sample/mqtt/subscriber/Subscriber.java)
+
+##AMQP
+The majority of the code is contained within two classes.
+* [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/amqp/publisher/Publisher.java)
+* [Subscriber.java](samples/java/subscriber/src/main/java/com/peoplenet/m2m/sample/amqp/subscriber/Subscriber.java) 
+
 
 #### Running the Java Sample
 To run the samples, first clone the project from github.
@@ -90,13 +97,17 @@ As you can see, the subscriber received five separate messages from the publishe
 
 To shutdown the consumer, simply use ```<ctrl-c>``` from the command line.
 
-#### Java Sample Configuration
+#### Java Sample Configuration (MQTT and AMQP)
 The publisher and subscriber are each configured via their own mqtt.properties file contained within the project.
 * [samples/java/publisher/src/main/resources/mqtt.properties](samples/java/publisher/src/main/resources/mqtt.properties)
 * [samples/java/subscriber/src/main/resources/mqtt.properties](samples/java/subscriber/src/main/resources/mqtt.properties)
 
-##### Credentials
+The publisher and subscriber are each configured via their own amqp.properties file contained within the project.
+* [samples/java/publisher/src/main/resources/amqp.properties](samples/java/publisher/src/main/resources/amqp.properties)
+* [samples/java/subscriber/src/main/resources/amqp.properties](samples/java/subscriber/src/main/resources/amqp.properties)
+
+##### MQTT Credentials
 Note, the default *mqtt.properties* files are configured to use the freely available mosquito broker located at *test.mosquito.org*. Unlike the PeopleNet M2M broker, the mosquito broker does not require any security credentials.
 
-##### ClientId
+##### MQTT ClientId
 There is a chance for clientId conflicts using the default mqtt.properties. If you notice the clients being disconnected frequently, it could be that you're conflicting with someone else using the same default clientId. In this case, feel free to update the clientId in each mqtt.properties file to be unique for your personal tests.

@@ -1,4 +1,4 @@
-package com.peoplenet.m2m.sample.subscriber;
+package com.peoplenet.m2m.sample.mqtt.subscriber;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package com.peoplenet.m2m.sample.publisher;
+package com.peoplenet.m2m.sample.mqtt.publisher;
 
 import java.util.Properties;
 import net.sf.xenqtt.message.QoS;

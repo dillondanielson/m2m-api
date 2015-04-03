@@ -14,7 +14,8 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "com.peoplenet.m2m.sample.subscriber.Subscriber"
+mainClassName = "com.peoplenet.m2m.sample.amqp.subscriber.AMQPSubscriber"
+//mainClassName = "com.peoplenet.m2m.sample.mqtt.publisher.Subscriber"
 
 repositories {
     jcenter()
@@ -22,4 +23,5 @@ repositories {
 
 dependencies {
     compile 'net.sf.xenqtt:xenqtt:0.9.5'
+    compile 'com.rabbitmq:amqp-client:3.3.4'
 }

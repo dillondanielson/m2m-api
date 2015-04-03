@@ -11,10 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class AMQPPublisher {
-    private static final Logger log = Logger.getLogger(AMQPPublisher.class.getName());
+public class Publisher {
+    private static final Logger log = Logger.getLogger(Publisher.class.getName());
 
-    private AMQPSettings amqpSettings;
+    private AmqpSettings amqpSettings;
     private ConnectionFactory factory;
     private Connection connection;
     private Channel channel;
@@ -22,7 +22,7 @@ public class AMQPPublisher {
 
     public static void main(String[] args) {
 
-        AMQPPublisher publisher = new AMQPPublisher();
+        Publisher publisher = new Publisher();
         try {
             publisher.init();
             publisher.publish();
@@ -35,7 +35,7 @@ public class AMQPPublisher {
 
     private void init() throws IOException {
         log.info("Initializing AMQP publisher.");
-        amqpSettings = new AMQPSettings(getAMQPProperties());
+        amqpSettings = new AmqpSettings(getAMQPProperties());
         factory = configureConnectionFactory();
         connection = factory.newConnection();
         channel = connection.createChannel();

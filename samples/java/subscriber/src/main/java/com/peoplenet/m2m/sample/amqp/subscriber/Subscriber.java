@@ -3,16 +3,15 @@ package com.peoplenet.m2m.sample.amqp.subscriber;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class AMQPSubscriber {
-    private static final Logger log = Logger.getLogger(AMQPSubscriber.class.getName());
+public class Subscriber {
+    private static final Logger log = Logger.getLogger(Subscriber.class.getName());
 
-    private AMQPSettings amqpSettings;
+    private AmqpSettings amqpSettings;
     private ConnectionFactory factory;
     private Connection connection;
     private Channel channel;
@@ -20,7 +19,7 @@ public class AMQPSubscriber {
 
     public static void main(String[] args) {
 
-        AMQPSubscriber subscriber = new AMQPSubscriber();
+        Subscriber subscriber = new Subscriber();
         try {
             subscriber.init();
             subscriber.subscribe();
@@ -45,7 +44,7 @@ public class AMQPSubscriber {
 
     private void init() throws IOException {
         log.info("Initializing AMQP publisher.");
-        amqpSettings = new AMQPSettings(getAMQPProperties());
+        amqpSettings = new AmqpSettings(getAMQPProperties());
         factory = configureConnectionFactory();
         connection = factory.newConnection();
         channel = connection.createChannel();

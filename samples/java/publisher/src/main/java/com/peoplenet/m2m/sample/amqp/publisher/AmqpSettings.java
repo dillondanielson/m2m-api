@@ -4,7 +4,7 @@ import net.sf.xenqtt.message.QoS;
 
 import java.util.Properties;
 
-public class AMQPSettings {
+public class AmqpSettings {
 
     private final String brokerHost;
     private final Integer port;
@@ -15,7 +15,7 @@ public class AMQPSettings {
     private final String routingKey;
 
 
-    public AMQPSettings(Properties props) {
+    public AmqpSettings(Properties props) {
         brokerHost = props.getProperty("hostname");
         virtualhost = props.getProperty("virtualhost");
         port = Integer.valueOf(props.getProperty("port"));

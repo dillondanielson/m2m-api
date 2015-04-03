@@ -14,7 +14,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "com.peoplenet.m2m.sample.amqp.publisher.AMQPPublisher"
+mainClassName = "com.peoplenet.m2m.sample.amqp.publisher.Publisher"
 //mainClassName = "com.peoplenet.m2m.sample.mqtt.publisher.Publisher"
 
 repositories {

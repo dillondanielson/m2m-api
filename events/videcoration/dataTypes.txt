@@ -1,0 +1,56 @@
+String - String representation of an object
+UUID - String representation of UUID. http://en.wikipedia.org/wiki/Universally_unique_identifier
+Integer: A java integer. Range: [-2^31, 2^31)
+Long: A java long. Range: [-2^64, 2^64)
+
+CurrentRegulation
+	Regulation the driver is currently operating under. This integer value looks up to
+	intouch_drivers.hos_reg.hos_reg_id in the PFM.
+	The list of regulations is subject to change, but the values at the time of this
+	documentation are:
+	1 = US Federal 60/7 Long Haul
+	2 = US Federal 70/8 Long Haul
+	4 = US Federal 60/7 Short Haul
+	5 = US Federal 70/8 Short Haul
+	6 = Alaska 70/7
+	7 = Alaska 80/8
+	8 = Texas 70/7
+	9 = Florida 70/7
+	10 = Florida 80/8
+	11 = California 80/8
+	12 = Canada Cycle1 70/7
+	13 = Canada Cycle2 120/14
+	14 = Mexico
+	18 = US Pasngr 60/7
+	19 = US Pasngr 70/8
+	20 = USA Oilfield 70/8
+	21 = Canada 60N Cycle1 80/7
+	22 = Canada 60N Cycle2 120/14
+	23 = US Federal 60/7 Long Haul
+	24 = US Federal 70/8 Long Haul
+	25 = US Federal 60/7 Short Haul
+	26 = US Federal 70/8 Short Haul
+	27 = Beta-US Federal 60/7 Long Haul
+	28 = Beta-US Federal 70/8 Long Haul
+	29 = Beta-US Federal 60/7 Short Haul
+	30 = Beta-US Federal 70/8 Short Haul
+	31 = US Federal 60/7 SH - No 30 Min Break
+	32 = US Federal 70/8 SH - No 30 Min Break
+	33 = Alberta 60S
+
+DutyStatus
+	drivers current duty status & modifier
+	Values are:
+	0 = Undefined
+	1 = Off Duty
+	2 = Sleeper Berth
+	3 = On Duty (not driving)
+	4 = Driving
+	5 = Off Duty Personal Conveyance
+	6 = Off Duty Oil Field
+	7 = Sleeper Berth Oil Field
+	8 = On Duty Hazmat
+
+UnixTime
+	Number representation of time.
+	http://en.wikipedia.org/wiki/Unix_time

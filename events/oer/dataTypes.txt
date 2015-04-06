@@ -1,0 +1,6 @@
+Short: A java short.  Range: [-2^15, 2^15)
+Integer: A java integer. Range: [-2^31, 2^31)
+Long: A java long. Range: [-2^64, 2^64)
+Double: A java double precision floating point number.
+String: A java String.
+Enumeration: a java enumeration represented as strings.  Valid values are listed as a pipe delimited list. i.e. "VALUE_1"|"VALUE_2"|"VALUE_3"

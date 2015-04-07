@@ -37,7 +37,7 @@ git clone https://github.com/PeopleNet/m2m-api.git
 ```
 *Note, this requires git to be installed locally. If git is not installed on your system, it can be downloaded [here](http://git-scm.com/downloads).*
 
-*Running AMQP examples assumes RabbitMQ is installed and running on localhost on standard port (5672). In case you use a different host, port or credentials, connections settings would require adjusting (amqp.properties). Rabbit can be downloaded and installed [here](https://www.rabbitmq.com/download.html).* 
+*Running AMQP examples assumes that you have access to the public RabbitMQ broker and can provide host, port or credentials, connections settings via amqp.properties. Typically you would be publishing and consuming messages to and from exchanges and queues that have been pre-declared for a given use case.* 
 
 Next, from the samples/java/subscriber directory, run the following.
 ```
@@ -115,5 +115,5 @@ Note, the default *mqtt.properties* files are configured to use the freely avail
 There is a chance for clientId conflicts using the default mqtt.properties. If you notice the clients being disconnected frequently, it could be that you're conflicting with someone else using the same default clientId. In this case, feel free to update the clientId in each mqtt.properties file to be unique for your personal tests.
 
 ##### AMQP Credentials, Queues and Exchanges
-Typically users, exchanges, virtual hosts and queues can be configured using Rabbit admin console (if you are trying to run the samples locally). The real world use case to subscribe messages from PeopleNet M2M broker would have all these broker entities already established and communicated. 
+Users, exchanges, virtual hosts and queues will typically be pre-declared for a given use case to publish and subscribe messages from PeopleNet M2M public broker. 
 

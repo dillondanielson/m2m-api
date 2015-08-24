@@ -27,7 +27,7 @@ The majority of the code is contained within two classes.
 ##AMQP
 The majority of the code is contained within two classes.
 * [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/amqp/publisher/Publisher.java)
-* [Subscriber.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/amqp/subscriber/Subscriber.java)
+* Subscriber.java - Sample coming soon
 
 #### Running the Java Sample
 To run the samples, first clone the project from github.

@@ -1,4 +1,4 @@
-package com.peoplenet.m2m.sample.publisher;
+package com.peoplenet.m2m.sample.mqtt.publisher;
 
 import java.io.IOException;
 import java.util.Date;

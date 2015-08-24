@@ -42,7 +42,10 @@ Next, from the samples/java/subscriber directory, run the following.
 ```
 gradlew run
 ```
-This will start the sample MQTT subscriber. The console should display a log similar to the following.
+
+or `./gradlew run` on a mac.
+
+After downloading any dependencies, this will start the sample MQTT subscriber. The console should display a log similar to the following.
 ```
 Feb 19, 2015 4:48:50 PM com.peoplenet.m2m.sample.subscriber.Subscriber init
 INFO: Initializing MQTT subscriber...
@@ -54,7 +57,7 @@ Feb 19, 2015 4:48:51 PM com.peoplenet.m2m.sample.subscriber.Subscriber waitForDe
 INFO: Waiting for messages until program termination.
 ```
 
-Now, start the publisher to send messages. From the samples/java/publisher directory run the following.
+Now, in another window, start the publisher to send messages. From the samples/java/publisher directory run the following.
 ```
 gradlew run
 ```

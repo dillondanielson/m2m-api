@@ -21,13 +21,13 @@ The sample java code utilizes the [XenQTT](https://github.com/TwoGuysFromKabul/x
 
 ##MQTT
 The majority of the code is contained within two classes.
-* [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/publisher/Publisher.java)
-* [Subscriber.java](samples/java/subscriber/src/main/java/com/peoplenet/m2m/sample/subscriber/Subscriber.java)
+* [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/mqtt/publisher/Publisher.java)
+* [Subscriber.java](samples/java/subscriber/src/main/java/com/peoplenet/m2m/sample/mqtt/subscriber/Subscriber.java)
 
 ##AMQP
 The majority of the code is contained within two classes.
-* Publisher.java - sample to be uploaded
-* Subscriber.java - sample to be uploaded
+* [Publisher.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/amqp/publisher/Publisher.java)
+* [Subscriber.java](samples/java/publisher/src/main/java/com/peoplenet/m2m/sample/amqp/subscriber/Subscriber.java)
 
 #### Running the Java Sample
 To run the samples, first clone the project from github.

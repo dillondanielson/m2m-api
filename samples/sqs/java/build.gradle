@@ -18,6 +18,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "com.github.johnrengelman.shadow"
 
+sourceCompatibility = 1.8
+
 mainClassName = "com.peoplenet.m2m.sample.sqs.App"
 
 repositories {
@@ -25,5 +27,11 @@ repositories {
 }
 
 dependencies {
-  compile 'com.amazonaws:aws-java-sdk-sqs:1.10.50'
+
+    compile 'com.amazonaws:aws-java-sdk-sqs:1.10.50'
+
+    // Required for metrics calculations and logging
+    compile 'io.dropwizard.metrics:metrics-core:3.1.2'
+    // Provides simple console based logging.
+    compile 'org.slf4j:slf4j-simple:1.7.16'
 }

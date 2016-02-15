@@ -22,8 +22,36 @@ To build the project, from the [samples/sqs/java](samples/sqs/java) directory ex
 ```
 gradlew shadowJar
 ```
-Once the project is built, run the sample app as follows.
+Once the project is built, the run the sample app as follows.
 ```
-java -jar  build/libs/java-all.jar ${queueName}
+java -jar  build/libs/java-all.jar ${consumptionMode} ${queueName}
 ```
-Where `${queueName}` is the name of an existing Amazon SQS Queue.
+Where `${consumptionMode}` is either `sync` or `async`.
+And, `${queueName}` is the name of an existing Amazon SQS Queue.
+
+To stop the application simply execute `ctl-c` from the terminal window running the sample.
+
+After running for 10 seconds, the sample application will output various metrics indicating the rate at which the application is sending and receiving sample messages. These numbers may vary based on the machine running the sample and network latency to AWS. For example:
+```
+-- Meters ----------------------------------------------------------------------
+received
+             count = 1500
+         mean rate = 149.68 events/second
+     1-minute rate = 136.40 events/second
+     5-minute rate = 134.50 events/second
+    15-minute rate = 134.17 events/second
+sent
+             count = 1250
+         mean rate = 124.71 events/second
+     1-minute rate = 112.24 events/second
+     5-minute rate = 110.46 events/second
+    15-minute rate = 110.16 events/second
+```
+To increase the throughput of the sample application increase the number of `senderThreads` and `consumerThreads` in the java class [App.java](samples/sqs/java/src/main/java/com/peoplenet/m2m/sample/sqs/App.java). The default for each is `1`. For example, the following change increases the number of sender and consumer threads to `10`.
+```
+public class App {
+
+	private static final int senderThreads = 10;
+	private static final int consumerThreads = 10;
+```
+After making the change, re-build the sample via `gradlew shadowJar` and re-run the sample to observe the increased throughput.

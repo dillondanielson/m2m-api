@@ -16,7 +16,7 @@ git clone https://github.com/PeopleNet/m2m-api.git
 In order to run the samples, you'll need to configure your AWS credentials locally. The samples use the [DefaultAWSCredentialsProviderChain](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html) which allows configuration via environment variables, Java System Properties, a local file or an AWS instance profile. See [DefaultAWSCredentialsProviderChain](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html) for more details.
 
 ### SQS Java Sample
-The Java sample code is located at [samples/sqs/java](samples/sqs/java).
+The Java sample code requires Java 8 or higher and is located at [samples/sqs/java](samples/sqs/java).
 
 To build the project, from the [samples/sqs/java](samples/sqs/java) directory execute the following.
 ```

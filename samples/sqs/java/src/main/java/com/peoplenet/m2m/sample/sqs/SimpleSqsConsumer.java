@@ -61,6 +61,10 @@ public class SimpleSqsConsumer implements Runnable {
 
 		List<Message> messages = receiveMessageResult.getMessages();
 
+		if (messages.isEmpty()) {
+			return;
+		}
+
 		// process messages
 		messages.stream().forEach(message -> {
 			// add processing logic here

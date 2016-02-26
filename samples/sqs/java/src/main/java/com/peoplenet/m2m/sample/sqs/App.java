@@ -45,7 +45,7 @@ public class App {
 			consumer = new AsyncSqsConsumer(queueUrl);
 			break;
 		default:
-			System.out.println("Please specify the consumption mode as either 'sync' or 'async.");
+			System.out.println("Please specify the consumption mode as either 'sync' or 'async'.");
 			throw new IllegalArgumentException();
 		}
 		return consumer;
